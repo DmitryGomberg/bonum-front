@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@theme {
+	--color-black: #050200;
+	--color-white: #ffffff;
+
+	--color-red: #ef4444;
+
+	--color-brown1: #fcf9f3;
+	--color-brown2: #f7f1e2;
+	--color-brown3: #eddebb;
+	--color-brown4: #8a6f1e;
+	--color-brown5: #7e6007;
+}
+body.dark {
+	--color-white: #2e2e2e;
+	--color-black: #fff0ec;
+	--color-red: #4a2c2a;
+	--color-brown1: #453a38;
+	--color-brown2: #6e4b3d;
+	--color-brown3: #7a5a4b;
+	--color-brown4: #a1887f;
+	--color-brown5: #bcaaa4;
+}
+body {
+	font-family: 'Segoe UI', 'Arial', sans-serif;
+}
+@layer base {
+	input::placeholder,
+	textarea::placeholder {
+		color: var(--color-black);
+		font-size: 14px;
+		font-weight: 400
+	}
+}
+
+.particles-bg-canvas-self {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	pointer-events: none; /* Отключает взаимодействие с фоном */
+}
+

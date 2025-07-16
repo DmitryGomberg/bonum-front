@@ -1,0 +1,34 @@
+@keyframes enter {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes exit {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+}
+
+.notification {
+	animation-duration: 0.3s;
+	animation-fill-mode: forwards;
+}
+
+.animate-enter {
+	animation-name: enter;
+}
+
+.animate-exit {
+	animation-name: exit;
+}
