@@ -92,6 +92,7 @@ export const ModalEditAccount: FC<IModalEditAccountProps> = (props) => {
       <UiInput label={'Название счета'} placeholder={'Введите значение'} value={name} onChange={(e)=> setName(e.target.value)} />
 
        <UiSelect
+          value={currency || null}
           label={'Валюта'}
           options={currencyOptions}
           defaultId={props.currency_id}

@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import logo from '../../assets/images/logo.svg';
 import {Link, useNavigate} from "react-router-dom";
 import {
    ChecklistOutlined, ReceiptOutlined, SettingsOutlined, SpaceDashboardOutlined, Close

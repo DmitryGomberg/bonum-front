@@ -27,7 +27,7 @@ const App: React.FC = () => {
          <NotificationsProvider>
             <UserProvider>
 
-               <Router>
+               <Router basename="/bonum-front">
                   <Notification />
                   <Routes>
                      <Route

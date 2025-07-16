@@ -1,6 +1,6 @@
 {
   "name": "bonum",
-  "homepage": "https://dmitrygomberg/github.io/bonum-front/",
+  "homepage": "https://dmitrygomberg.github.io/bonum-front/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
