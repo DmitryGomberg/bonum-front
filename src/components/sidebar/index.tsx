@@ -18,7 +18,7 @@ export const Sidebar: FC<SidebarProps> = ({ isOpen, onClose }) => {
       <>
          {isOpen && (
             <div
-               className="fixed inset-0 bg-brown4/80 backdrop-blur-md z-40"
+               className="fixed inset-0 bg-brown3/70 backdrop-blur-sm z-40"
                onClick={onClose}
             ></div>
          )}

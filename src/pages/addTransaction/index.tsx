@@ -35,6 +35,7 @@ export const AddTransactionPage: FC = () => {
    const [selectedAccount, setSelectedAccount] = useState<number | null>(null);
    const [selectedAccountTo, setSelectedAccountTo] = useState<number | null>(null);
    const [dollarRate, setDollarRate] = useState<number | undefined>();
+   const [loading, setLoading] = useState<boolean>(false);
    const userId = useUserId();
    const {showNotification} = useNotifications();
 
@@ -92,6 +93,9 @@ export const AddTransactionPage: FC = () => {
    }, []);
 
    const saveTransaction = async () => {
+      if (loading) return; // Prevent multiple clicks
+      setLoading(true); // Set loading to true to disable the button
+
       try {
          if (sum === 0) {
             showNotification('Укажите корректную сумму', 'error');
@@ -113,14 +117,15 @@ export const AddTransactionPage: FC = () => {
             showNotification('Укажите счет поступления', 'error');
             return;
          }
-         if(selectedAccount === selectedAccountTo && type === 3) {
+         if (selectedAccount === selectedAccountTo && type === 3) {
             showNotification('Укажите корректный счет поступления', 'error');
             return;
          }
-         if(type === 3 && sumConverted === 0){
+         if (type === 3 && sumConverted === 0) {
             showNotification('Укажите корректную сумму перевода', 'error');
             return;
          }
+
          const transaction = {
             sum,
             description,
@@ -146,11 +151,12 @@ export const AddTransactionPage: FC = () => {
          }
 
          showNotification('Запись успешно создана', 'success');
-
          setSum(0);
          setDescription('');
       } catch (error) {
          console.error('Error saving transaction:', error);
+      } finally {
+         setLoading(false); // Re-enable the button after processing
       }
    };
 
@@ -256,7 +262,7 @@ export const AddTransactionPage: FC = () => {
                )}
             </div>
             <UiTextarea label={'Описание'} placeholder={'Введите значение'} value={description} onChange={(e) => setDescription(e.target.value)} />
-            <UiButton label={'Добавить запись'} onClick={saveTransaction} />
+            <UiButton label={loading ? 'Сохранение...' : 'Добавить запись'} onClick={saveTransaction} disabled={loading} />
          </div>
       </div>
    );

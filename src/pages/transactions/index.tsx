@@ -3,10 +3,11 @@ import { useUserId } from "../../utils/auth.tsx";
 import { UiSelect } from "../../ui/select";
 import {UiLink} from "../../ui/link";
 import {UiButton} from "../../ui/button";
-import {Add} from "@mui/icons-material";
+import {Add, DeleteOutline} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {useNotifications} from "../../context/notifications.tsx";
 import {UiTitle} from "../../ui/titles/title";
+import {formatDate} from "../../utils/dateParser.tsx";
 
 interface Transaction {
   id: number;
@@ -32,6 +33,7 @@ export const TransactionsPage: FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedType, setSelectedType] = useState<number | ''>('');
+  const [loading, setLoading] = useState<boolean>(true);
   const userId = useUserId();
   const navigate = useNavigate();
   const {showNotification} = useNotifications();
@@ -49,6 +51,8 @@ export const TransactionsPage: FC = () => {
         setCategories(uniqueCategories);
       } catch (error) {
         console.error('Error fetching transactions:', error);
+      } finally {
+        setLoading(false); // Set loading to false after data is fetched
       }
     };
 
@@ -117,9 +121,8 @@ export const TransactionsPage: FC = () => {
               placeholder="Выберите тип транзакции"
            />
          </div>
-
          <div className="border border-brown3 rounded-md overflow-x-auto">
-           <div className="min-w-[780px] grid grid-cols-6 gap-4 p-2 px-4 text-white font-bold bg-brown5">
+           <div className="min-w-[780px] grid grid-cols-7 gap-4 p-2 px-4 text-white font-bold bg-brown5">
              <span>Дата</span>
              <span>Описание</span>
              <span>Категория</span>
@@ -127,41 +130,49 @@ export const TransactionsPage: FC = () => {
              <span>Сумма</span>
              <span>Перевод на</span>
            </div>
-           {filteredTransactions.length > 0 ? filteredTransactions.slice().reverse().map((transaction) => (
-              <div
-                 key={transaction.id}
-                 className="min-w-[780px] grid grid-cols-7 gap-4 p-2 px-4 bg-brown1"
-              >
-                <span>{transaction.date}</span>
-                <span>{transaction.description || ''}</span>
-                <span>{transaction.category_name || '-'}</span>
-                <span>{transaction.source_account_name}</span>
-                <span
-                   className={`font-medium ${
-                      transaction.type_id === 1
-                         ? 'text-green-500'
-                         : transaction.type_id === 2
-                            ? 'text-red-500'
-                            : 'text-black'
-                   }`}
-                >
+           {loading ? (
+              <p className="text-center">Loading...</p>
+           ) : (
+              filteredTransactions.length > 0 ? filteredTransactions.slice().reverse().map((transaction) => (
+                   <div
+                      key={transaction.id}
+                      className="min-w-[780px] grid grid-cols-7 gap-4 p-2 px-4 bg-brown1"
+                   >
+                     <span>{formatDate(transaction.date)}</span>
+                     <span>{transaction.description || ''}</span>
+                     <span>{transaction.category_name || '-'}</span>
+                     <span>{transaction.source_account_name}</span>
+                     <span
+                        className={`font-medium ${
+                           transaction.type_id === 1
+                              ? 'text-green-500'
+                              : transaction.type_id === 2
+                                 ? 'text-red-500'
+                                 : 'text-black'
+                        }`}
+                     >
                   {transaction.sum} {transaction.currency_type}
                 </span>
-                <span>{transaction.destination_account_name || '-'}</span>
-                <button
-                   className="text-red-500 hover:underline"
-                   onClick={() => deleteTransaction(transaction.id)}
-                >
-                  Удалить
-                </button>
-              </div>
-           )) : (
-              <div className={'py-4'}>
-                <p className={'text-[14px] text-black text-center w-full'}>Транзакции не найдены</p>
-                <UiLink className={'text-center'} goto={'/createTransaction'}>
-                  Создать первую транзакцию
-                </UiLink>
-              </div>
+                     <span>{transaction.destination_account_name || '-'}</span>
+                     <button
+                        className="text-red-500 hover:underline cursor-pointer"
+                        onClick={() => {
+                          if (window.confirm('Вы уверены, что хотите удалить эту транзакцию?')) {
+                            deleteTransaction(transaction.id);
+                          }
+                        }}
+                     >
+                       <DeleteOutline />
+                     </button>
+                   </div>
+                )) : (
+                   <div className={'py-4'}>
+                     <p className={'text-[14px] text-black text-center w-full'}>Транзакции не найдены</p>
+                     <UiLink className={'text-center'} goto={'/createTransaction'}>
+                       Создать первую транзакцию
+                     </UiLink>
+                   </div>
+                )
            )}
          </div>
        </div>

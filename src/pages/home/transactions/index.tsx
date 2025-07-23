@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { UiSubtitle } from '../../../ui/titles/subtitle';
 import { UiLink } from '../../../ui/link';
 import {useUserId} from "../../../utils/auth.tsx";
+import {formatDate} from "../../../utils/dateParser.tsx";
 
 interface Transaction {
    id: number;
@@ -57,7 +58,7 @@ export const HomeTransactions: FC = () => {
                      transactions.slice().reverse().map((transaction) => (
                         <div key={transaction.id}
                              className="flex justify-between items-center border-b border-brown3 last:border-b-0 py-2 text-[14px]">
-                           <span className="text-black flex-[1] max-w-[100px] md:max-w-[100%]">{transaction.date}</span>
+                           <span className="text-black flex-[1] max-w-[100px] md:max-w-[100%]">{formatDate(transaction.date)}</span>
                            <span className="text-black flex-[1] max-w-[100px] md:max-w-[100%]"><span
                               className={'px-2 py-1 border border-brown3 rounded-md leading-0 text-[11px] font-medium'}>{transaction.category_name || 'Не указана'}</span></span>
                            <span className="text-black truncate flex-[1]">{transaction.description || ''}</span>

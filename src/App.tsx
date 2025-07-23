@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { LoginPage } from './pages/login';
 import { RegisterPage } from './pages/registration';
 import { HomePage } from './pages/home';
@@ -26,17 +26,9 @@ const App: React.FC = () => {
       <AuthProvider>
          <NotificationsProvider>
             <UserProvider>
-
-               <Router basename="/bonum-front">
+               <Router>
                   <Notification />
                   <Routes>
-                     <Route
-                        path="*"
-                        element={
-                           <ErrorPage />
-                        }
-                     />
-
                      <Route path="/registration" element={<RegisterPage/>}/>
                      <Route path="/login" element={<LoginPage/>}/>
                      <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
@@ -82,7 +74,12 @@ const App: React.FC = () => {
                            </ProtectedRoute>
                         }
                      />
-
+                     <Route
+                        path="*"
+                        element={
+                           <ErrorPage />
+                        }
+                     />
                   </Routes>
                </Router>
             </UserProvider>

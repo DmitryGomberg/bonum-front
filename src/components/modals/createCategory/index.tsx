@@ -18,8 +18,8 @@ export const ModalCreateCategory: FC<IModalCreateCategoryProps> = (props) => {
    const [error, setError] = useState<string | null>(null);
 
    const handleCreateCategory = async () => {
-      if (!name || !icon) {
-         setError('Name and icon are required');
+      if (!name) {
+         setError('Укажите имя категории');
          return;
       }
 
@@ -68,12 +68,12 @@ export const ModalCreateCategory: FC<IModalCreateCategoryProps> = (props) => {
                value={name}
                onChange={(e) => setName(e.target.value)}
             />
-            <UiInput
-               placeholder="Введите значение"
-               label={'Иконка категории'}
-               value={icon}
-               onChange={(e) => setIcon(e.target.value)}
-            />
+            {/*<UiInput*/}
+            {/*   placeholder="Введите значение"*/}
+            {/*   label={'Иконка категории'}*/}
+            {/*   value={icon}*/}
+            {/*   onChange={(e) => setIcon(e.target.value)}*/}
+            {/*/>*/}
             <UiButton label={'Создать'} onClick={handleCreateCategory} disabled={loading} />
          </div>
       </UiModal>

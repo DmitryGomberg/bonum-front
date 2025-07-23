@@ -17,7 +17,7 @@ export const LoginPage: FC = () => {
    const [error, setError] = useState('')
 
    const handleLogin = async () => {
-      if (!validateFields()) return
+      if (!validateFields()) return;
       try {
          const response = await fetch('https://bonum-back-production.up.railway.app/api/login', {
             method: 'POST',
@@ -28,15 +28,21 @@ export const LoginPage: FC = () => {
          if (response.ok) {
             const data = await response.json();
             console.log('Login response:', data);
-            showNotification('Успешный вход', 'success');
-            login(data.accessToken, data.userId);
-            navigate('/home');
+            if (data.accessToken && data.userId) {
+               showNotification('Успешный вход', 'success');
+               login(data.accessToken, data.userId);
+               navigate('/home');
+            } else {
+               showNotification('Ошибка авторизации: отсутствуют данные токена или пользователя', 'error');
+               console.error('Login failed: token or userId is missing');
+            }
          } else {
             showNotification('Неверные email или пароль', 'error');
             console.error('Login failed');
          }
       } catch (error) {
          console.error('Error:', error);
+         showNotification('Ошибка сервера. Попробуйте позже.', 'error');
       }
    };
 

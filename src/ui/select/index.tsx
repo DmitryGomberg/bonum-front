@@ -57,7 +57,7 @@ export const UiSelect: React.FC<SelectProps> = (props) => {
                   {props.options.map((option) => (
                      <button
                         key={option.id}
-                        className="outline-brown4 z-20 cursor-pointer py-1 hover:bg-brown2 transition px-[12px] text-[14px] text-left"
+                        className="outline-brown4 z-20 cursor-pointer py-3 hover:bg-brown2 transition px-[12px] text-[14px] text-left"
                         onClick={() => handleOptionClick(option)}
                      >
                         {option.label}
