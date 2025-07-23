@@ -25,7 +25,7 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
    useEffect(() => {
       const fetchUserData = async () => {
          try {
-            const response = await fetch(`http://localhost:8080/api/user/${userID}`);
+            const response = await fetch(`https://bonum-back-production.up.railway.app/api/user/${userID}`);
             if (!response.ok) {
                throw new Error('Failed to fetch user data');
             }

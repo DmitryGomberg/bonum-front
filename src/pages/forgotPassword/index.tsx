@@ -10,7 +10,7 @@ export const ForgotPasswordPage: FC = () => {
 
    const handleSubmit = async () => {
       try {
-         const response = await fetch('http://localhost:8080/api/forgot-password', {
+         const response = await fetch('https://bonum-back-production.up.railway.app/api/forgot-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email }),

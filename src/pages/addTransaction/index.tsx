@@ -59,7 +59,7 @@ export const AddTransactionPage: FC = () => {
    useEffect(() => {
       const fetchCategories = async () => {
          try {
-            const response = await fetch(`http://localhost:8080/api/getAllCategories?user_id=${userId}`);
+            const response = await fetch(`https://bonum-back-production.up.railway.app/api/getAllCategories?user_id=${userId}`);
             const data = await response.json();
             const options = data.map((category: Category) => ({
                id: category.id,
@@ -73,7 +73,7 @@ export const AddTransactionPage: FC = () => {
 
       const fetchAccounts = async () => {
          try {
-            const response = await fetch(`http://localhost:8080/api/accounts?user_id=${userId}`);
+            const response = await fetch(`https://bonum-back-production.up.railway.app/api/accounts?user_id=${userId}`);
             const data = await response.json();
             const options = data.map((account: Account) => ({
                id: account.id,
@@ -133,7 +133,7 @@ export const AddTransactionPage: FC = () => {
             price_course: sum && sumConverted && type === 3 ? (sumConverted / sum).toFixed(4) : 1,
          };
 
-         const response = await fetch('http://localhost:8080/api/addTransaction', {
+         const response = await fetch('https://bonum-back-production.up.railway.app/api/addTransaction', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',

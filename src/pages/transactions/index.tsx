@@ -39,7 +39,7 @@ export const TransactionsPage: FC = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/transactions?user_id=${userId}`);
+        const response = await fetch(`https://bonum-back-production.up.railway.app/api/transactions?user_id=${userId}`);
         const data = (await response.json()) as Transaction[];
         setTransactions(data);
         setFilteredTransactions(data);
@@ -57,7 +57,7 @@ export const TransactionsPage: FC = () => {
 
   const deleteTransaction = async (transactionId: number) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/deleteTransaction/${transactionId}`, {
+      const response = await fetch(`https://bonum-back-production.up.railway.app/api/deleteTransaction/${transactionId}`, {
         method: 'DELETE',
       });
 

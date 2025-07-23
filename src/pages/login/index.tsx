@@ -19,15 +19,17 @@ export const LoginPage: FC = () => {
    const handleLogin = async () => {
       if (!validateFields()) return
       try {
-         const response = await fetch('http://localhost:8080/api/login', {
+         const response = await fetch('https://bonum-back-production.up.railway.app/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
             credentials: 'include',
          });
          if (response.ok) {
+            const data = await response.json();
+            console.log('Login response:', data);
             showNotification('Успешный вход', 'success');
-            login();
+            login(data.accessToken, data.userId);
             navigate('/home');
          } else {
             showNotification('Неверные email или пароль', 'error');

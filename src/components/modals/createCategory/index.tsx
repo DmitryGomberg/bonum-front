@@ -27,7 +27,7 @@ export const ModalCreateCategory: FC<IModalCreateCategoryProps> = (props) => {
       setError(null);
 
       try {
-         const response = await fetch('http://localhost:8080/api/createCategory', {
+         const response = await fetch('https://bonum-back-production.up.railway.app/api/createCategory', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',

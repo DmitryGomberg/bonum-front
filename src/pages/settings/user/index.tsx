@@ -18,7 +18,7 @@ export const SettingsUser: FC = () => {
       const fetchUserData = async () => {
          try {
             setLoading(true);
-            const response = await fetch(`http://localhost:8080/api/user/${userId}`);
+            const response = await fetch(`https://bonum-back-production.up.railway.app/api/user/${userId}`);
             if (!response.ok) {
                throw new Error('Failed to fetch user data');
             }
@@ -44,7 +44,7 @@ export const SettingsUser: FC = () => {
 
       try {
          setLoading(true);
-         const response = await fetch(`http://localhost:8080/api/userInitials`, {
+         const response = await fetch(`https://bonum-back-production.up.railway.app/api/userInitials`, {
             method: 'PUT',
             headers: {
                'Content-Type': 'application/json',

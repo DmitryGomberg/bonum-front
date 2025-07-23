@@ -21,7 +21,7 @@ export const SettingsCategories: FC = () => {
 
    const fetchCategories = async () => {
       try {
-         const response = await fetch(`http://localhost:8080/api/getAllCategories?user_id=${userId}`);
+         const response = await fetch(`https://bonum-back-production.up.railway.app/api/getAllCategories?user_id=${userId}`);
          const data = await response.json();
          const sortedCategories = sortCategories(data);
          setCategories(sortedCategories);

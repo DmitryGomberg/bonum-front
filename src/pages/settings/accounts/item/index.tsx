@@ -36,7 +36,7 @@ export const SettingsAccount: FC<ISettingsAccountProps> = (props) => {
 
    const handleDeleteAccount = async () => {
       try {
-         const response = await fetch('http://localhost:8080/api/accounts/delete', {
+         const response = await fetch('https://bonum-back-production.up.railway.app/api/accounts/delete', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',

@@ -33,7 +33,7 @@ export const HomeCards: FC = () => {
 
       const fetchTransactions = async () => {
          try {
-            const response = await fetch(`http://localhost:8080/api/transactions?user_id=${userId}`);
+            const response = await fetch(`https://bonum-back-production.up.railway.app/api/transactions?user_id=${userId}`);
             if (!response.ok) {
                throw new Error('Failed to fetch transactions');
             }

@@ -61,7 +61,7 @@ export const AccountsPage: FC = () => {
       }
 
       try {
-         const response = await fetch(`http://localhost:8080/api/accounts?user_id=${userId}`);
+         const response = await fetch(`https://bonum-back-production.up.railway.app/api/accounts?user_id=${userId}`);
          if (!response.ok) {
             throw new Error('Failed to fetch accounts');
          }
@@ -69,7 +69,7 @@ export const AccountsPage: FC = () => {
          const accountsData: ServerAccount[] = await response.json();
 
          // Fetch transactions for all accounts
-         const transactionsResponse = await fetch(`http://localhost:8080/api/transactions?user_id=${userId}`);
+         const transactionsResponse = await fetch(`https://bonum-back-production.up.railway.app/api/transactions?user_id=${userId}`);
          if (!transactionsResponse.ok) {
             throw new Error('Failed to fetch transactions');
          }

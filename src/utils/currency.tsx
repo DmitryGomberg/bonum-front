@@ -1,6 +1,6 @@
 export const fetchCurrencyNames = async (): Promise<string[]> => {
    try {
-      const response = await fetch('http://localhost:8080/api/currencies');
+      const response = await fetch('https://bonum-back-production.up.railway.app/api/currencies');
       if (!response.ok) {
          throw new Error('Failed to fetch currencies');
       }

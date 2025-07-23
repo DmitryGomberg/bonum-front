@@ -59,7 +59,7 @@ export const ModalEditAccount: FC<IModalEditAccountProps> = (props) => {
       setLoading(false);
 
       try {
-         const response = await fetch('http://localhost:8080/api/accounts/edit', {
+         const response = await fetch('https://bonum-back-production.up.railway.app/api/accounts/edit', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',

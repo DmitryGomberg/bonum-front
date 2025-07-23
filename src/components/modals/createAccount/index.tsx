@@ -55,7 +55,7 @@ export const ModalCreateAccount: FC<IModalCreateAccountProps> = (props) => {
       setLoading(true);
 
       try {
-         const response = await fetch('http://localhost:8080/api/accounts', {
+         const response = await fetch('https://bonum-back-production.up.railway.app/api/accounts', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -72,6 +72,7 @@ export const ModalCreateAccount: FC<IModalCreateAccountProps> = (props) => {
             showNotification('Ошибка при создании счета', 'error');
             throw new Error('Failed to create account');
          }
+
 
          showNotification('Счет успешно создан', 'success');
          props.onClose();
