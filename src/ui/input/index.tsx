@@ -23,9 +23,11 @@ export const UiInput: FC<IUiInputProps> = (props) => {
             onChange={props.onChange}
             className={`bg-brown1 border border-brown3 rounded-md px-[12px] py-[8px] text-[14px] text-black font-normal outline-brown4 outline-offset-4 ${props.className}`}
          />
-         <div className={'absolute right-[5px] text-black bottom-[5px] cursor-pointer bg-brown1 w-[30px] h-[30px] flex items-center justify-center'}>
-            {props.contentRight && props.contentRight}
-         </div>
+         {props.contentRight &&
+             <div className={'absolute right-[5px] text-black bottom-[5px] cursor-pointer bg-brown1 w-[30px] h-[30px] flex items-center justify-center'}>
+                 props.contentRight
+             </div>
+         }
       </div>
    )
 }
